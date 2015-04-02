@@ -56,4 +56,4 @@ To inspect the container
 
 To inspect a specific resource from container (example: IP Address)
 
-# docker inspect -f '{{ .NetworkSettings.IPAddress }}' <containername>
+	# docker inspect -f '{{ .NetworkSettings.IPAddress }}' <containername>

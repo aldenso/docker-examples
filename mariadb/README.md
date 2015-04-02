@@ -59,8 +59,7 @@ Create a sample table and test database:
 
 use testdb
 
-CREATE TABLE testmariadb (id int NOT NULL AUTO_INCREMENT, name VARCHAR(10), lastname VARCHAR(10), ->
-	-> birth DATE, death DATE, PRIMARY KEY(id));
+CREATE TABLE testmariadb (id int NOT NULL AUTO_INCREMENT, name VARCHAR(10), lastname VARCHAR(10), birth DATE, death DATE, PRIMARY KEY(id));
 
 insert into testmariadb (name, lastname, birth, death) values ('Jhon', 'Doe', '1982-02-11', '2050-02-12');
 
