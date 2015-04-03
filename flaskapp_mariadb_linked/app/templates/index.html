@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="utf-8">
+<head>
+</head>
+<body>
+<h3>{{ title }}</h3>
+
+{% for p in paragraph %}
+<h5>{{ p }}</h5>
+{% endfor %}
+
+{% if users %}
+<p>Name - Lastname - Birth - Death</p>
+{% for user in users %}
+<p>{{user.name}} - {{user.lastname}} - {{user.birth}} - {{user.death}}</p>
+{% endfor %}
+{% endif %}
+</body>
