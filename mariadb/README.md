@@ -12,7 +12,7 @@ Check your Docker version
 Perform the build
 
 	# docker build --rm -t <name>/mariadb:centos7 .
-	# docker build --rm -t mariadb/database:centos7 .
+	# docker build --rm -t aldenso/mariadb:centos7 .
 
 Check the image out.
 
@@ -31,17 +31,17 @@ To use a separate data volume for /var/lib/mysql (recommended, to allow image up
 Create a data volume container: (it doesn't matter what image you use here, we'll never run this container again; it's just here to reference the data volume)
 
 	# docker run --name=mariadb-data -v /var/lib/mysql <name>/mariadb true
-	# docker run --name=mariadb-data -v /var/lib/mysql mariadb/database:centos7 true
+	# docker run --name=mariadb-data -v /var/lib/mysql aldenso/mariadb:centos7 true
 
 Initialise it using a temporary one-time mariadb container:
 
 	# docker run -rm --volumes-from=mariadb-data <name>/mariadb /config_mariadb.sh
-	# docker run -rm --volumes-from=mariadb-data mariadb/database:centos7 /config_mariadb.sh
+	# docker run -rm --volumes-from=mariadb-data aldenso/mariadb:centos7 /config_mariadb.sh
 
 And now create the new persistent mariadb container:
 
 	# docker run --name=mariadb -d -p 3306:3306 --volumes-from=mariadb-data <name>/mariadb
-	# docker run --name=mariadb1 -d -p 45000:3306 --volumes-from=mariadb-data mariadb/database:centos7
+	# docker run --name=mariadb1 -d -p 45000:3306 --volumes-from=mariadb-data aldenso/mariadb:centos7
 
 Using your MariaDB container
 
