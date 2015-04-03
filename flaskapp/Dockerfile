@@ -8,6 +8,6 @@ ADD . /src
 
 RUN cd /src; pip install -r requirements.txt
 
-EXPOSE 8000
+EXPOSE 8080
 
 CMD ["python", "/src/run.py"]
