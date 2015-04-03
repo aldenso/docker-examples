@@ -33,6 +33,10 @@ Create a data volume container: (it doesn't matter what image you use here, we'l
 	# docker run --name=mariadb-data -v /var/lib/mysql <name>/mariadb true
 	# docker run --name=mariadb-data -v /var/lib/mysql aldenso/mariadb:centos7 true
 
+or if you already have an active /var/lib/mysql and don't want to mix it, create another dir and assign it
+	# mkdir -p /vols4docker/mariadb
+	# docker run --name=mariadb-data -v /vols4docker/mariadb:/var/lib/mysql aldenso/mariadb:centos7 true
+
 Initialise it using a temporary one-time mariadb container:
 
 	# docker run -rm --volumes-from=mariadb-data <name>/mariadb /config_mariadb.sh
@@ -57,14 +61,14 @@ Connecting to mariadb:
 
 Create a sample table and test database:
 
-use testdb
+	use testdb
 
-CREATE TABLE testmariadb (id int NOT NULL AUTO_INCREMENT, name VARCHAR(10), lastname VARCHAR(10), birth DATE, death DATE, PRIMARY KEY(id));
+	CREATE TABLE testmariadb (id int NOT NULL AUTO_INCREMENT, name VARCHAR(10), lastname VARCHAR(10), birth DATE, death DATE, PRIMARY KEY(id));
 
-insert into testmariadb (name, lastname, birth, death) values ('Jhon', 'Doe', '1982-02-11', '2050-02-12');
+	insert into testmariadb (name, lastname, birth, death) values ('Jhon', 'Doe', '1982-02-11', '2050-02-12');
 
-show tables;
+	show tables;
 
-describe testmariadb;
+	describe testmariadb;
 
-select * from testmariadb;
+	select * from testmariadb;

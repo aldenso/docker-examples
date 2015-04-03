@@ -17,7 +17,8 @@ mysql -uroot -pmysqlPassword -e "GRANT ALL PRIVILEGES ON *.* TO 'testdb'@'%' IDE
 mysql -uroot -pmysqlPassword -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'mysqlPassword' WITH GRANT OPTION; FLUSH PRIVILEGES;"
 mysql -uroot -pmysqlPassword -e "select user, host FROM mysql.user;"
 killall mysqld
-#sleep 10
+# Give some time to complete
+sleep 30
 }
 
 # Call all functions
