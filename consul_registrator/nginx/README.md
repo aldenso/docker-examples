@@ -24,7 +24,7 @@ Check consul
 Create registrator container
 
 		# docker run -d -v /var/run/docker.sock:/tmp/docker.sock --name registrator -h <hostname> progrium/registrator:latest -internal consul://$DOCKER_IP:8500
-	where $DOCKER_IP=172.17.42.1
+		where $DOCKER_IP=172.17.42.1
 
 Check registrator
 
@@ -44,6 +44,7 @@ Check registrator
 		2015/04/06 04:22:07 registrator: added: 3728d4899918 centos:consul:53:udp
 
 Start a few app previously created (https://github.com/aldenso/docker-examples/tree/master/flaskapp), but giving some envs for registrator to work with consul.
+
 		# docker run -d --name flaskapp1 -p 8080 -e "SERVICE_NAME=flaskapp" -e "SERVICE_TAGS=master" aldenso/flaskapp
 		# docker run -d --name flaskapp2 -p 8080 -e "SERVICE_NAME=flaskapp" -e "SERVICE_TAGS=master" aldenso/flaskapp
 		# docker run -d --name flaskapp3 -p 8080 -e "SERVICE_NAME=flaskapp" -e "SERVICE_TAGS=backup" aldenso/flaskapp
