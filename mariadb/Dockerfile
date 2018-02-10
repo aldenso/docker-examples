@@ -1,4 +1,4 @@
-FROM centos:centos7
+FROM centos:latest
 MAINTAINER Aldenso <aldenso@gmail.com>
 
 RUN yum -y update && yum clean all
