@@ -1,15 +1,11 @@
-FROM centos:centos7
+FROM python:alpine3.6
 
-RUN yum -y update; yum clean all
-RUN yum -y install epel-release; yum clean all
-RUN yum -y install python-pip; yum clean all
-RUN yum -y install gcc; yum clean all
-RUN yum -y install python-devel; yum clean all
-RUN yum -y install mysql-devel; yum clean all
+RUN apk update && apk add mariadb-client-libs
 
 ADD . /src
+WORKDIR /src
 
-RUN cd /src; pip install -r requirements.txt
+RUN pip install -r requirements.txt
 
 EXPOSE 8080
 
