@@ -1,59 +1,76 @@
-dockerfiles-centos7-python-flask
-================================
+# docker-python-flask
 
-CentOS 7 dockerfile for python app with flask
+Docker example for python3 app with flask.
 
-Get Docker version
+Get Docker version.
 
-	# docker version
+```sh
+docker version
+```
 
 To build:
 
-Copy the sources down and do the build-
+Copy the sources down and do the build.
 
-	# docker build --rm -t <name>/flask:centos7 .
-	# docker build --rm -t aldenso/flask:centos7 .
+```sh
+docker build --rm -t <name>/flask:flask .
+# docker build --rm -t aldenso/flask:flask .
+```
 
 To run (if port 8080 is open on your host):
 
-	# docker run -d -p 8080:8080 <name>/flask:centos7
-	# docker run -d -p 8080:8080 aldenso/flask:centos7
+```sh
+docker run -d -p 8080:8080 <name>/flask:flask
+# docker run -d -p 8080:8080 aldenso/flask:flask
+```
 
 or to assign a random port that maps to port 8080 on the container:
 
-	# docker run -d -p 8080 <name>/flask:centos7
-	# docker run -d -p 8080 aldenso/flask:centos7
+```sh
+docker run -d -p 8080 <name>/flask:flask
+# docker run -d -p 8080 aldenso/flask:flask
+```
 
-To the port that the container is listening on:
+Check the container:
 
-	# docker ps
+```sh
+docker ps
+```
 
 To test:
 
-	# curl http://localhost:8080
-	# curl http://$(docker inspect -f '{{.NetworkSettings.IPAddress}}' <containername>):8080
-	# curl http://localhost:<HostPort>
+```sh
+curl http://localhost:8080
+curl http://$(docker inspect -f '{{.NetworkSettings.IPAddress}}' <containername>):8080
+# curl http://localhost:<HostPort>
+```
 
-To view the logs
+To view the logs.
 
-	# docker logs <containername>
+```sh
+docker logs <containername>
+```
 
-To list containers
+To stop a running container.
 
-	# docker ps <containername>
+```sh
+docker stop <containername>
+```
 
-To stop a running container
+To restart a running container.
 
-	# docker stop <containername>
+```sh
+docker restart <containername>
+```
 
-To restart a running container
+To inspect the container.
 
-	# docker restart <containername>
+```sh
+docker inspect <containername>
+```
 
-To inspect the container
+To inspect a specific resource from container (example: IP Address).
 
-	# docker inspect <containername>
-
-To inspect a specific resource from container (example: IP Address)
-
-	# docker inspect -f '{{ .NetworkSettings.IPAddress }}' <containername>
+```sh
+docker inspect -f '{{ .NetworkSettings.IPAddress }}' <containername>
+```
