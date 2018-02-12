@@ -33,7 +33,7 @@ docker run -d -p 8080 --link mariadb:mariadb1 <name>/flaskmariadb:flaskmariadb
 # aldenso/flaskmariadb:flaskmariadb
 ```
 
-To the port that the container is listening on:
+Check the container:
 
 ```sh
 docker ps
@@ -73,12 +73,6 @@ To view the logs.
 
 ```sh
 docker logs <containername>
-```
-
-To list containers.
-
-```sh
-docker ps <containername>
 ```
 
 To stop a running container.
