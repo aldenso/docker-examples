@@ -92,7 +92,10 @@ curl http://<YOURIPADDRESS>:8080/voting/api/v1/candidates/name/aldenso -X GET
 
 ```json
 {
-  "votes": 0
+  "candidate": {
+    "name": "aldenso",
+    "votes": 0
+  }
 }
 ```
 
@@ -128,14 +131,16 @@ Get all candidates info.
 
 ```json
 {
-  "candidates": {
-    "aldenso": {
+  "candidates": [
+    {
+      "name": "pennywise",
       "votes": 0
     },
-    "pennywise": {
+    {
+      "name": "aldenso",
       "votes": 0
     }
-  }
+  ]
 }
 ```
 
@@ -171,14 +176,16 @@ curl http://<YOURIPADDRESS>:8080/voting/api/v1/candidates -X GET
 
 ```json
 {
-  "candidates": {
-    "aldenso": {
-      "votes": 3
-    },
-    "pennywise": {
+  "candidates": [
+    {
+      "name": "pennywise",
       "votes": 2
+    },
+    {
+      "name": "aldenso",
+      "votes": 3
     }
-  }
+  ]
 }
 ```
 
@@ -199,13 +206,18 @@ curl http://<YOURIPADDRESS>:8080/index
 
 <h5>Simple app to query a redis db.</h5>
 
+
+
 <p>Candidate - Votes</p>
 
-<p>aldenso - 3</p>
 
 <p>pennywise - 2</p>
 
-</body>%
+<p>aldenso - 3</p>
+
+
+
+</body>%  
 ```
 
 

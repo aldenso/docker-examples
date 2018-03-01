@@ -1,12 +1,11 @@
 from flask import render_template, jsonify, abort, make_response, request
 from app import app, db
 
-def isInt(s):
+def ifInt(s):
     try:
-        int(s)
-        return True
-    except ValueError:
-        return False
+        return int(s)
+    except ValueError as err:
+        return err
 
 # Avoid html response for errors
 @app.errorhandler(404)
@@ -29,17 +28,19 @@ def index():
     paragraph = ["Simple app to query a redis db."]
 
     candidates = db.keys(pattern="*")
-    alldata = {}
+    alldata = []
     if not candidates:
         return jsonify({'message': 'No candidates!'})
     else:
         candidates = [item.decode('utf-8') for item in candidates]
-        for i in candidates:
-            values = db.hmget(i, "votes")
+        for candidate in candidates:
+            values = db.hmget(candidate, "votes")
             if values != [None]:
                 values = [val.decode('utf-8') for val in values]
-                alldata[i] = int("".join(values))
-    print(alldata)
+                votesdict = {'votes': ifInt("".join(values))}
+                candidatedict = {"name": candidate}
+                candidatedict.update(votesdict)
+                alldata.append(candidatedict)
     return render_template("index.html", title=title, paragraph=paragraph, candidates=alldata)
 
 
@@ -65,12 +66,13 @@ def get_candidates():
         return jsonify({'message': 'No candidates!'})
     else:
         candidates = [item.decode('utf-8') for item in candidates]
-        alldata = {}
-        for i in candidates:
-            values = db.hmget(i, "votes")
+        alldata = []
+        for candidate in candidates:
+            values = db.hmget(candidate, "votes")
             if values != [None]:
-                # convert from byte list to dict with int
-                alldata[i] = dict([("votes", int(key.decode('utf-8'))) for key in values])
+                candidatedict = {"name": candidate}
+                candidatedict.update(dict([("votes", ifInt(key.decode('utf-8'))) for key in values]))
+                alldata.append(candidatedict)
         return jsonify({'candidates': alldata})
 
 @app.route('/voting/api/v1/candidates/name/<string:name>', methods=['GET'])
@@ -80,9 +82,10 @@ def get_candidate(name):
     if candidate == [None]:
         return jsonify({'error': 'No Candidate!'}), 400
     else:
-        # convert from byte list to int
-        candidate = int("".join([key.decode('utf-8') for key in candidate]))
-        return jsonify({'votes': candidate})
+        votesdict = {"votes": ifInt("".join([key.decode('utf-8') for key in candidate]))}
+        candidatedict = {"name": name}
+        candidatedict.update(votesdict)
+        return jsonify({'candidate': candidatedict})
 
 
 @app.route('/voting/api/v1/candidates/name/<string:name>', methods=['DELETE'])

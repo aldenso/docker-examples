@@ -12,10 +12,9 @@
 {% if candidates %}
 <p>Candidate - Votes</p>
 
-{% for key, value in candidates.items() %}
-
-<p>{{key}} - {{value}}</p>
-
+{% for candidate in candidates %}
+<p>{{candidate.name}} - {{candidate.votes}}</p>
 {% endfor%}
+
 {% endif %}
 </body>
